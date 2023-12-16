@@ -1,0 +1,4 @@
+﻿  Concurs.cpp
+D:\Coding\nerd-things\Concurs\Concurs\Concurs.cpp(77,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+D:\Coding\nerd-things\Concurs\Concurs\Concurs.cpp(74,24): warning C4101: GiftCounter: неиспользованная локальная переменная
+  Concurs.vcxproj -> D:\Coding\nerd-things\Concurs\x64\Debug\Concurs.exe
