@@ -1,5 +1,1 @@
-﻿  Concurs.cpp
-D:\Coding\nerd-things\Concurs\Concurs\Concurs.cpp(109,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-D:\Coding\nerd-things\Concurs\Concurs\Concurs.cpp(106,24): warning C4101: GiftCounter: неиспользованная локальная переменная
-C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(1094,5): error MSB6006: "link.exe" завершилась с кодом 1168.
-LINK : fatal error LNK1168: не удается открыть D:\Coding\nerd-things\Concurs\x64\Debug\Concurs.exe для записи
+﻿LINK : fatal error LNK1201: Ошибка при записи в базу данных "D:\Coding\nerd-things\Concurs\x64\Debug\Concurs.pdb" программы; возможно, не хватает места на диске, недопустимый путь или недостаточно прав

@@ -29,20 +29,10 @@ int ANIH()
 void Progress_Bar(double progress_c)
 {
     int progress_b = (progress_c / 184000) * 100;
-    COORD pos = {0, 0};
+    COORD pos = { 0, 0 };
 
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
     cout << progress_b << "%" << endl;
-}
-
-bool Is_OutOfStock(unsigned short int* stockList, vector<int> wishList)
-{
-    for (int Index = 0; Index < wishList_size; Index++)
-    {
-        if (stockList[wishList[Index]] == maxGiftCount)
-            return true;
-    }
-    return false;
 }
 
 void TempIn(string line, unsigned short int* giftCounter, vector<int> child_wish_list)
@@ -54,8 +44,12 @@ void TempIn(string line, unsigned short int* giftCounter, vector<int> child_wish
     char delimiter = ',';
     int intIdGift = 0;
     int intIdChild = 0;
+    //index to iterate through gifts that are given to child
+    int takenIndex = 0;
+    work_file_result << "ChildId" << limiter << "GiftId" << endl;
+
     //going through every str
-    while (getline(work_file_kids, line)) 
+    while (getline(work_file_kids, line))
     {
         stringstream stream(line);
         string idGift;
@@ -73,8 +67,10 @@ void TempIn(string line, unsigned short int* giftCounter, vector<int> child_wish
         }
         //giving random gifts to children
         while (cycling)
-        {           
-            int random_gift = rand() % stockList_size;
+        {
+            //int random_gift = rand() % stockList_size;
+            //changing random_gift to gift
+            int gift = child_wish_list[takenIndex];
             for (int Index = 0; Index < wishList_size; Index++)
             {
                 //if random gift is in child's wishlist, 
@@ -83,24 +79,25 @@ void TempIn(string line, unsigned short int* giftCounter, vector<int> child_wish
                 //if the gift is not in wishlist, 
                 //but the gifts that are in it are out of stock, 
                 //give child this gift
-                if ((child_wish_list[Index] == random_gift && giftCounter[random_gift] < maxGiftCount) ||
-                    (child_wish_list[Index] != random_gift && Is_OutOfStock(giftCounter, child_wish_list)))
-                {   
-                    work_file_result << intIdChild << limiter << random_gift << "\n";
+                if ((child_wish_list[Index] == gift && giftCounter[gift] < maxGiftCount) ||
+                    (child_wish_list[Index] != gift && giftCounter[child_wish_list[Index]] >= maxGiftCount))
+                {
+                    work_file_result << intIdChild << limiter << gift << "\n";
                     //counting how much of certain type of gift is left
-                    giftCounter[random_gift]++;
+                    giftCounter[gift]++;
                     progress_counter++;
                     cycling = false;
                     break;
                 }
-                            //if there isn't, check other gift
+                //if there isn't, check other gift
+                takenIndex++;
                 //silly progress bar :3
                 Progress_Bar(progress_counter);
             }
         }
         //clear previous child gifts id's data
         child_wish_list.clear();
-    }   
+    }
     work_file_kids.close();
 }
 
@@ -112,5 +109,5 @@ int main()
     srand(time(0));
 
     TempIn(Line, GiftCounter, ChildGiftlist);
-    ANIH();  
+    ANIH();
 }
